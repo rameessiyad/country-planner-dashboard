@@ -14,7 +14,6 @@ const App = () => {
           Country Explorer
         </Link>
 
-        {/* Show Favorites button only if not on /favorites page */}
         {location.pathname !== "/favorites" && (
           <Link
             to="/favorites"

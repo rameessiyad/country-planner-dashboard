@@ -13,10 +13,12 @@ const CountryDetails = () => {
     const fetchDetails = async () => {
       try {
         const countryData = await getCountryByName(name);
-        setCountry(countryData);
+        const countryObj = countryData[0];
 
-        if (countryData.capital?.[0]) {
-          const weatherData = await getWeatherByCity(countryData.capital[0]);
+        setCountry(countryObj);
+
+        if (countryObj?.capital?.[0]) {
+          const weatherData = await getWeatherByCity(countryObj.capital[0]);
           setWeather(weatherData);
         }
       } catch (err) {
@@ -46,14 +48,15 @@ const CountryDetails = () => {
       <div className="bg-white shadow rounded-lg p-6 flex flex-col md:flex-row gap-6">
         <img
           src={country.flags?.svg}
-          alt={country.name}
+          alt={country.name.common}
           className="w-full md:w-1/3 h-60 object-cover rounded"
         />
 
         <div className="flex-1">
-          <h2 className="text-2xl font-bold mb-4">{country.name}</h2>
+          <h2 className="text-2xl font-bold mb-4">{country.name.common}</h2>
           <p>
-            <span className="font-semibold">Official Name:</span> {country.name}
+            <span className="font-semibold">Official Name:</span>{" "}
+            {country.name?.official}
           </p>
           <p>
             <span className="font-semibold">Capital:</span>{" "}
@@ -75,7 +78,7 @@ const CountryDetails = () => {
           </p>
           <p>
             <span className="font-semibold">Timezones:</span>{" "}
-            {/* {country.timezones.join(", ")} */}
+            {country.timezones}
           </p>
         </div>
       </div>
