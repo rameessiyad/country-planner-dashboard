@@ -54,7 +54,7 @@ src/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/country-explorer-dashboard.git
+git clone https://github.com/yourusername/country-explorer-dashboard.git](https://github.com/rameessiyad/country-planner-dashboard.git
 cd country-explorer-dashboard
 
 Install dependencies
