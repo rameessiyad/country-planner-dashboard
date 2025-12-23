@@ -7,7 +7,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
       placeholder="Search country..."
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="w-full max-w-md p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="w-full max-w-md p-2 mb-4 border rounded-lg focus:outline-none focus:ring-1"
     />
   );
 };
