@@ -11,6 +11,7 @@ const CountryList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [region, setRegion] = useState("");
   const [regions, setRegions] = useState([]);
+  const [population, setPopulation] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 12;
 
@@ -35,10 +36,22 @@ const CountryList = () => {
   }, []);
 
   const filteredCountries = countries.filter((country) => {
-    return (
-      country.name.common.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (region === "" || country.region === region)
-    );
+    const searchMatch = country.name.common
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const regionMatch = region === "" || country.region === region;
+
+    let populationMatch = true;
+    if (population === "small")
+      populationMatch = country.population < 1_000_000;
+    else if (population === "medium")
+      populationMatch =
+        country.population >= 1_000_000 && country.population <= 10_000_000;
+    else if (population === "large")
+      populationMatch = country.population > 10_000_000;
+
+    return searchMatch && regionMatch && populationMatch;
   });
 
   const indexOfLast = currentPage * countriesPerPage;
@@ -63,7 +76,13 @@ const CountryList = () => {
     <div className="p-6">
       <div className="flex flex-col md:flex-row md:justify-between mb-6 gap-4">
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Filters region={region} setRegion={setRegion} regions={regions} />
+        <Filters
+          region={region}
+          setRegion={setRegion}
+          regions={regions}
+          population={population}
+          setPopulation={setPopulation}
+        />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
