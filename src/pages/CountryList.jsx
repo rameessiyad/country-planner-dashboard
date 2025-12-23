@@ -34,7 +34,6 @@ const CountryList = () => {
     fetchCountries();
   }, []);
 
-  // Filter countries based on search and region
   const filteredCountries = countries.filter((country) => {
     return (
       country.name.common.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -42,7 +41,6 @@ const CountryList = () => {
     );
   });
 
-  // Pagination logic
   const indexOfLast = currentPage * countriesPerPage;
   const indexOfFirst = indexOfLast - countriesPerPage;
   const currentCountries = filteredCountries.slice(indexOfFirst, indexOfLast);
@@ -69,36 +67,51 @@ const CountryList = () => {
         ))}
       </div>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-center items-center mt-6 gap-2">
-        <button
-          onClick={prevPage}
-          disabled={currentPage === 1}
-          className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
-        >
-          Prev
-        </button>
-
-        {/* Page numbers */}
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+      <div className="flex justify-center items-center mt-8">
+        <div className="flex flex-wrap items-center gap-2 bg-white px-4 py-3 rounded-xl shadow-md">
           <button
-            key={num}
-            onClick={() => goToPage(num)}
-            className={`px-3 py-1 rounded ${
-              currentPage === num ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
+            onClick={prevPage}
+            disabled={currentPage === 1}
+            className="px-3 py-1.5 rounded-lg bg-linear-to-r from-blue-500 to-blue-600 text-white text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition"
           >
-            {num}
+            Prev
           </button>
-        ))}
 
-        <button
-          onClick={nextPage}
-          disabled={currentPage === totalPages}
-          className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
-        >
-          Next
-        </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter(
+              (num) =>
+                num === 1 ||
+                num === totalPages ||
+                Math.abs(num - currentPage) <= 1
+            )
+            .map((num, index, arr) => (
+              <React.Fragment key={num}>
+                {index > 0 && num - arr[index - 1] > 1 && (
+                  <span className="px-2 text-gray-400">...</span>
+                )}
+
+                <button
+                  onClick={() => goToPage(num)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition
+              ${
+                currentPage === num
+                  ? "bg-linear-to-r from-purple-500 to-pink-500 text-white shadow"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+                >
+                  {num}
+                </button>
+              </React.Fragment>
+            ))}
+
+          <button
+            onClick={nextPage}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1.5 rounded-lg bg-linear-to-r from-blue-500 to-blue-600 text-white text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
