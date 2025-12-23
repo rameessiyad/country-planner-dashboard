@@ -5,7 +5,6 @@ import { useFavorites } from "../context/FavoritesContext";
 
 const CountryCard = ({ country }) => {
   const { toggleFavorite, isFavorite } = useFavorites();
-
   const favorite = isFavorite(country.name.common);
 
   const handleFavoriteClick = (e) => {
@@ -16,7 +15,7 @@ const CountryCard = ({ country }) => {
 
   return (
     <Link to={`/country/${country.name.common}`} className="group relative">
-      <div className="border border-gray-200 rounded-lg shadow-md overflow-hidden bg-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div className="border border-gray-200 dark:border-slate-700 rounded-lg shadow-md overflow-hidden bg-white dark:bg-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:shadow-slate-900/50">
         <div className="relative">
           <img
             src={country.flags?.svg}
@@ -30,27 +29,36 @@ const CountryCard = ({ country }) => {
 
           <button
             onClick={handleFavoriteClick}
-            className="absolute top-2 right-2 bg-white rounded-full p-2 shadow hover:scale-110 transition-transform"
+            className="absolute top-2 right-2 bg-white dark:bg-slate-700 rounded-full p-2 shadow hover:scale-110 transition-transform"
           >
             {favorite ? (
               <FaHeart className="text-red-500 text-lg" />
             ) : (
-              <FaRegHeart className="text-gray-600 text-lg" />
+              <FaRegHeart className="text-gray-600 dark:text-gray-300 text-lg" />
             )}
           </button>
         </div>
 
-        <div className="p-4">
-          <h3 className="font-bold text-lg mb-2">{country.name.common}</h3>
-          <p>
-            <span className="font-semibold">Capital:</span>{" "}
+        <div className="p-4 dark:text-slate-200">
+          <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">
+            {country.name.common}
+          </h3>
+          <p className="text-gray-700 dark:text-slate-400">
+            <span className="font-semibold text-gray-900 dark:text-slate-200">
+              Capital:
+            </span>{" "}
             {country.capital?.[0] || "N/A"}
           </p>
-          <p>
-            <span className="font-semibold">Region:</span> {country.region}
+          <p className="text-gray-700 dark:text-slate-400">
+            <span className="font-semibold text-gray-900 dark:text-slate-200">
+              Region:
+            </span>{" "}
+            {country.region}
           </p>
-          <p>
-            <span className="font-semibold">Population:</span>{" "}
+          <p className="text-gray-700 dark:text-slate-400">
+            <span className="font-semibold text-gray-900 dark:text-slate-200">
+              Population:
+            </span>{" "}
             {country.population?.toLocaleString()}
           </p>
         </div>

@@ -51,7 +51,12 @@ const CountryList = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
-  if (loading) return <p className="text-center mt-10">Loading countries...</p>;
+  if (loading)
+    return (
+      <p className="text-center mt-10 dark:text-slate-300">
+        Loading countries...
+      </p>
+    );
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
 
   return (
@@ -68,7 +73,7 @@ const CountryList = () => {
       </div>
 
       <div className="flex justify-center items-center mt-8">
-        <div className="flex flex-wrap items-center gap-2 bg-white px-4 py-3 rounded-xl shadow-md">
+        <div className="flex flex-wrap items-center gap-2 bg-white dark:bg-slate-500 px-4 py-3 rounded-xl shadow-md">
           <button
             onClick={prevPage}
             disabled={currentPage === 1}
@@ -96,7 +101,7 @@ const CountryList = () => {
               ${
                 currentPage === num
                   ? "bg-linear-to-r from-purple-500 to-pink-500 text-white shadow"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : "bg-gray-100  text-gray-700 hover:bg-gray-200"
               }`}
                 >
                   {num}
