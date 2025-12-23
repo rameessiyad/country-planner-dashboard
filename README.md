@@ -1,16 +1,80 @@
-# React + Vite
+# Country Explorer Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive React dashboard for exploring countries around the world. Users can view country details, filter by region and population, search with debouncing, mark favorites, and see weather information for capitals.
 
-Currently, two official plugins are available:
+Built with **React**, **Tailwind CSS**, and **React Router DOM**, using data from **REST Countries API** and **OpenWeatherMap API**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Country List:** Displays all countries in a responsive grid.
+- **Country Details:** View detailed information including flag, capital, population, area, timezones, and more.
+- **Favorites:** Add and remove countries to a favorites list.
+- **Filters:** Filter countries by region and population.
+- **Search:** Search countries with debouncing to reduce unnecessary API calls.
+- **Weather Info:** Displays current weather for the capital city using OpenWeatherMap.
+- **Pagination:** View countries with pagination for better UX.
+- **Dark Mode:** Toggle between light and dark themes.
+- **Responsive Design:** Works on mobile, tablet, and desktop.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Folder Structure
+src/
+├── components/
+│ ├── CountryCard.jsx
+│ ├── SearchBar.jsx
+│ ├── Filters.jsx
+├── pages/
+│ ├── CountryList.jsx
+│ ├── CountryDetails.jsx
+│ ├── Favorites.jsx
+├── services/
+│ ├── api.js
+├── context/
+│ ├── FavoritesContext.jsx
+├── App.jsx
+└── Main.jsx
+
+## APIs
+
+1. **REST Countries API** - Fetch country data  
+   Endpoint: `https://restcountries.com/v3.1/all`  
+
+2. **OpenWeatherMap API** - Fetch weather for capitals  
+   Endpoint: `https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}`  
+
+> ⚠️ The API key is stored in `.env` file for security.
+
+---
+
+## Setup & Installation
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/yourusername/country-explorer-dashboard.git
+cd country-explorer-dashboard
+
+Install dependencies
+
+npm install
+
+
+Create .env file
+
+Copy .env.example to .env and add your OpenWeatherMap API key:
+
+VITE_WEATHER_API_KEY=your_openweathermap_api_key
+
+
+Start the development server
+
+npm run dev
+
+
+Open the app
+
+Navigate to http://localhost:5173
+ (Vite default) in your browser.
