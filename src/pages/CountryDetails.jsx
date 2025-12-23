@@ -53,8 +53,7 @@ const CountryDetails = () => {
         <div className="flex-1">
           <h2 className="text-2xl font-bold mb-4">{country.name}</h2>
           <p>
-            <span className="font-semibold">Official Name:</span>{" "}
-            {country.name}
+            <span className="font-semibold">Official Name:</span> {country.name}
           </p>
           <p>
             <span className="font-semibold">Capital:</span>{" "}
@@ -72,8 +71,7 @@ const CountryDetails = () => {
             {country.population}
           </p>
           <p>
-            <span className="font-semibold">Area:</span>{" "}
-            {country.area} km²
+            <span className="font-semibold">Area:</span> {country.area} km²
           </p>
           <p>
             <span className="font-semibold">Timezones:</span>{" "}

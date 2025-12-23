@@ -1,13 +1,14 @@
 import axios from "axios";
 
-const COUNTRIES_BASE_URL = "https://restcountries.com/v3.1";
-
-const WEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5";
-const WEATHER_API_KEY = "ef543f302d9865d860dd490874641af9";
+const COUNTRIES_BASE_URL = import.meta.env.VITE_COUNTRIES_BASE_URL;
+const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_BASE_URL;
+const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 export const getAllCountries = async () => {
   try {
-    const response = await axios.get(`${COUNTRIES_BASE_URL}/all?fields=name,region,flags,population,capital,images`);
+    const response = await axios.get(
+      `${COUNTRIES_BASE_URL}/all?fields=name,region,flags,population,capital,images,id`
+    );
     return response.data;
   } catch (error) {
     console.log("Error fetching countries", error);

@@ -10,6 +10,7 @@ const CountryList = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [region, setRegion] = useState("");
+  const [regions, setRegions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 12;
 
@@ -18,6 +19,11 @@ const CountryList = () => {
       try {
         const data = await getAllCountries();
         setCountries(data);
+
+        const uniqueRegions = [
+          ...new Set(data.map((c) => c.region).filter(Boolean)),
+        ];
+        setRegions(uniqueRegions);
       } catch (err) {
         setError("Failed to fetch countries");
         console.error(err);
@@ -54,7 +60,7 @@ const CountryList = () => {
     <div className="p-6">
       <div className="flex flex-col md:flex-row md:justify-between mb-6 gap-4">
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Filters region={region} setRegion={setRegion} />
+        <Filters region={region} setRegion={setRegion} regions={regions} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
